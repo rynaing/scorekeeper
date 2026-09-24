@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scorekeeper — couch scoreboard</title>
+<meta name="robots" content="noindex, nofollow" />
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<link rel="stylesheet" href="styles.css?v=1790256659" />
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">🏆 Scorekeeper</div>
+  <div id="tableBadge" class="room-badge hidden"></div>
+  <button id="leaveBtn" class="btn small hidden">Leave</button>
+</header>
+<main>
+  <section id="view-home" class="view">
+    <h1 class="hero">Scorekeeper</h1>
+    <p class="sub">The couch scoreboard for card &amp; board games.</p>
+    <div class="home-grid">
+      <button id="newTableBtn" class="big-btn">＋ New table</button>
+      <div class="join-card">
+        <label for="joinCodeInput">Join a table</label>
+        <div class="join-row">
+          <input id="joinCodeInput" maxlength="4" placeholder="CODE" autocomplete="off" autocapitalize="characters" />
+          <button id="joinGoBtn" class="btn primary">Go</button>
+        </div>
+        <p id="homeErr" class="err hidden"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-join" class="view hidden">
+    <h2 class="view-title">Join table <span id="joinCodeLabel" class="code-inline"></span></h2>
+    <div class="join-card">
+      <label for="playerNameInput">Your name</label>
+      <div class="join-row">
+        <input id="playerNameInput" maxlength="20" placeholder="e.g. Ryan" autocomplete="off" />
+        <button id="joinTableBtn" class="btn primary">Join</button>
+      </div>
+      <p id="joinErr" class="err hidden"></p>
+    </div>
+  </section>
+
+  <section id="view-table" class="view hidden">
+    <div class="table-head">
+      <div id="qrBox" class="qr-box"></div>
+      <p class="hint">Scan to join · or enter code <b id="codeBig"></b></p>
+    </div>
+    <div id="board" class="board"></div>
+    <div id="scorePanel" class="score-panel hidden">
+      <div class="sel-name" id="selName"></div>
+      <div class="step-row" id="stepRow">
+        <span class="step-label">Step</span>
+        <button class="chip" data-step="1">1</button>
+        <button class="chip" data-step="5">5</button>
+        <button class="chip" data-step="10">10</button>
+      </div>
+      <div class="score-btns">
+        <button id="minusBtn" class="score-btn minus" aria-label="Subtract">−</button>
+        <button id="plusBtn" class="score-btn plus" aria-label="Add">＋</button>
+      </div>
+    </div>
+    <div class="add-row join-row">
+      <input id="addNameInput" maxlength="20" placeholder="Add player…" autocomplete="off" />
+      <button id="addPlayerBtn" class="btn">Add</button>
+    </div>
+    <div id="hostControls" class="host-controls hidden">
+      <button id="resetBtn" class="btn danger-ghost">Reset scores</button>
+      <button id="newTableBtn2" class="btn danger-ghost">New table</button>
+    </div>
+  </section>
+</main>
+<div id="toast" class="toast hidden"></div>
+<script src="app.js?v=1790256659"></script>
+</body>
+</html>
